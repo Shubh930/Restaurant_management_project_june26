@@ -1,2 +1,2 @@
 # SHUBHrestro
-this is my restaurant folder
+this is my restaurant git repository
