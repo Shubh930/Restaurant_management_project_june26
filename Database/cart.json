@@ -1,0 +1,10 @@
+[
+    {
+        "food_id": 170,
+        "food_name": "Pav Bhaji",
+        "food_price": 120,
+        "food_category": "Snacks",
+        "food_quantity": 5,
+        "food_total": 600
+    }
+]

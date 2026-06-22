@@ -1,0 +1,30 @@
+[
+    {
+        "Order_id": "ORD-02BC06",
+        "Order_time": "21-06-26  11:17:51",
+        "Order_type": "Dine in",
+        "Order_status": "Completed",
+        "Payment_status": "Paid",
+        "Table_no": 15,
+        "Items": [
+            {
+                "food_id": 108,
+                "food_name": "Hot Chocolate",
+                "food_price": 80,
+                "food_category": "Beverage",
+                "food_quantity": 6,
+                "food_total": 480
+            },
+            {
+                "food_id": 116,
+                "food_name": "French Fries",
+                "food_price": 70,
+                "food_category": "Fast Food",
+                "food_quantity": 4,
+                "food_total": 280
+            }
+        ],
+        "Total": 760,
+        "Payment_method": "Cash"
+    }
+]

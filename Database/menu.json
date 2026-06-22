@@ -1,0 +1,662 @@
+[
+    {
+        "food_id": 101,
+        "food_name": "Tea",
+        "food_price": 25,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 102,
+        "food_name": "Coffee",
+        "food_price": 35,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 103,
+        "food_name": "Green Tea",
+        "food_price": 30,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 104,
+        "food_name": "Black Coffee",
+        "food_price": 40,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 105,
+        "food_name": "Cold Coffee",
+        "food_price": 70,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 106,
+        "food_name": "Lemon Tea",
+        "food_price": 30,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 107,
+        "food_name": "Masala Tea",
+        "food_price": 35,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 108,
+        "food_name": "Hot Chocolate",
+        "food_price": 80,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 109,
+        "food_name": "Milkshake",
+        "food_price": 90,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 110,
+        "food_name": "Fresh Lime Soda",
+        "food_price": 50,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 111,
+        "food_name": "Momos",
+        "food_price": 50,
+        "food_category": "Junk Food"
+    },
+    {
+        "food_id": 112,
+        "food_name": "Sandwich",
+        "food_price": 60,
+        "food_category": "Junk Food"
+    },
+    {
+        "food_id": 113,
+        "food_name": "Burger",
+        "food_price": 59,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 114,
+        "food_name": "Cheese Burger",
+        "food_price": 99,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 115,
+        "food_name": "Veg Wrap",
+        "food_price": 80,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 116,
+        "food_name": "French Fries",
+        "food_price": 70,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 117,
+        "food_name": "Loaded Fries",
+        "food_price": 120,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 118,
+        "food_name": "Pizza Margherita",
+        "food_price": 180,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 119,
+        "food_name": "Farmhouse Pizza",
+        "food_price": 250,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 120,
+        "food_name": "Paneer Pizza",
+        "food_price": 240,
+        "food_category": "Fast Food"
+    },
+    {
+        "food_id": 121,
+        "food_name": "Idli",
+        "food_price": 50,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 122,
+        "food_name": "Vada",
+        "food_price": 40,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 123,
+        "food_name": "Plain Dosa",
+        "food_price": 70,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 124,
+        "food_name": "Masala Dosa",
+        "food_price": 90,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 125,
+        "food_name": "Rava Dosa",
+        "food_price": 100,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 126,
+        "food_name": "Uttapam",
+        "food_price": 90,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 127,
+        "food_name": "Pongal",
+        "food_price": 80,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 128,
+        "food_name": "Curd Rice",
+        "food_price": 70,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 129,
+        "food_name": "Lemon Rice",
+        "food_price": 70,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 130,
+        "food_name": "Bisibele Bath",
+        "food_price": 100,
+        "food_category": "South Indian"
+    },
+    {
+        "food_id": 131,
+        "food_name": "Paneer Butter Masala",
+        "food_price": 220,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 132,
+        "food_name": "Shahi Paneer",
+        "food_price": 230,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 133,
+        "food_name": "Dal Makhani",
+        "food_price": 180,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 134,
+        "food_name": "Dal Tadka",
+        "food_price": 150,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 135,
+        "food_name": "Mix Veg",
+        "food_price": 170,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 136,
+        "food_name": "Aloo Gobi",
+        "food_price": 160,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 137,
+        "food_name": "Malai Kofta",
+        "food_price": 220,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 138,
+        "food_name": "Chole Masala",
+        "food_price": 170,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 139,
+        "food_name": "Rajma",
+        "food_price": 160,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 140,
+        "food_name": "Kadai Paneer",
+        "food_price": 240,
+        "food_category": "North Indian"
+    },
+    {
+        "food_id": 141,
+        "food_name": "Butter Naan",
+        "food_price": 40,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 142,
+        "food_name": "Garlic Naan",
+        "food_price": 50,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 143,
+        "food_name": "Tandoori Roti",
+        "food_price": 20,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 144,
+        "food_name": "Missi Roti",
+        "food_price": 30,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 145,
+        "food_name": "Lachha Paratha",
+        "food_price": 45,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 146,
+        "food_name": "Stuffed Kulcha",
+        "food_price": 60,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 147,
+        "food_name": "Roomali Roti",
+        "food_price": 25,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 148,
+        "food_name": "Plain Paratha",
+        "food_price": 35,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 149,
+        "food_name": "Aloo Paratha",
+        "food_price": 60,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 150,
+        "food_name": "Paneer Paratha",
+        "food_price": 80,
+        "food_category": "Bread"
+    },
+    {
+        "food_id": 151,
+        "food_name": "Veg Noodles",
+        "food_price": 120,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 152,
+        "food_name": "Hakka Noodles",
+        "food_price": 140,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 153,
+        "food_name": "Schezwan Noodles",
+        "food_price": 150,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 154,
+        "food_name": "Veg Fried Rice",
+        "food_price": 130,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 155,
+        "food_name": "Schezwan Fried Rice",
+        "food_price": 150,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 156,
+        "food_name": "Manchurian",
+        "food_price": 160,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 157,
+        "food_name": "Chilli Paneer",
+        "food_price": 190,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 158,
+        "food_name": "Spring Roll",
+        "food_price": 120,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 159,
+        "food_name": "Honey Chilli Potato",
+        "food_price": 150,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 160,
+        "food_name": "Veg Soup",
+        "food_price": 90,
+        "food_category": "Chinese"
+    },
+    {
+        "food_id": 161,
+        "food_name": "Samosa",
+        "food_price": 20,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 162,
+        "food_name": "Kachori",
+        "food_price": 25,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 163,
+        "food_name": "Poha",
+        "food_price": 40,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 164,
+        "food_name": "Upma",
+        "food_price": 50,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 165,
+        "food_name": "Pakora",
+        "food_price": 60,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 166,
+        "food_name": "Dhokla",
+        "food_price": 50,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 167,
+        "food_name": "Bhel Puri",
+        "food_price": 60,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 168,
+        "food_name": "Pani Puri",
+        "food_price": 40,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 169,
+        "food_name": "Sev Puri",
+        "food_price": 50,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 170,
+        "food_name": "Pav Bhaji",
+        "food_price": 120,
+        "food_category": "Snacks"
+    },
+    {
+        "food_id": 171,
+        "food_name": "Gulab Jamun",
+        "food_price": 40,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 172,
+        "food_name": "Rasgulla",
+        "food_price": 40,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 173,
+        "food_name": "Jalebi",
+        "food_price": 50,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 174,
+        "food_name": "Rabri",
+        "food_price": 90,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 175,
+        "food_name": "Ice Cream",
+        "food_price": 60,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 176,
+        "food_name": "Brownie",
+        "food_price": 120,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 177,
+        "food_name": "Kulfi",
+        "food_price": 50,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 178,
+        "food_name": "Gajar Halwa",
+        "food_price": 80,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 179,
+        "food_name": "Kheer",
+        "food_price": 70,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 180,
+        "food_name": "Cheesecake",
+        "food_price": 180,
+        "food_category": "Dessert"
+    },
+    {
+        "food_id": 181,
+        "food_name": "Mineral Water",
+        "food_price": 20,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 182,
+        "food_name": "Orange Juice",
+        "food_price": 60,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 183,
+        "food_name": "Mango Shake",
+        "food_price": 90,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 184,
+        "food_name": "Banana Shake",
+        "food_price": 80,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 185,
+        "food_name": "Strawberry Shake",
+        "food_price": 100,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 186,
+        "food_name": "Sweet Lassi",
+        "food_price": 60,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 187,
+        "food_name": "Salted Lassi",
+        "food_price": 60,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 188,
+        "food_name": "Buttermilk",
+        "food_price": 40,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 189,
+        "food_name": "Coconut Water",
+        "food_price": 50,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 190,
+        "food_name": "Energy Drink",
+        "food_price": 110,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 191,
+        "food_name": "Veg Biryani",
+        "food_price": 180,
+        "food_category": "Rice"
+    },
+    {
+        "food_id": 192,
+        "food_name": "Paneer Biryani",
+        "food_price": 220,
+        "food_category": "Rice"
+    },
+    {
+        "food_id": 193,
+        "food_name": "Jeera Rice",
+        "food_price": 120,
+        "food_category": "Rice"
+    },
+    {
+        "food_id": 194,
+        "food_name": "Steam Rice",
+        "food_price": 100,
+        "food_category": "Rice"
+    },
+    {
+        "food_id": 195,
+        "food_name": "Veg Pulao",
+        "food_price": 150,
+        "food_category": "Rice"
+    },
+    {
+        "food_id": 196,
+        "food_name": "Curd",
+        "food_price": 40,
+        "food_category": "Sides"
+    },
+    {
+        "food_id": 197,
+        "food_name": "Green Salad",
+        "food_price": 60,
+        "food_category": "Sides"
+    },
+    {
+        "food_id": 198,
+        "food_name": "Papad",
+        "food_price": 20,
+        "food_category": "Sides"
+    },
+    {
+        "food_id": 199,
+        "food_name": "Pickle",
+        "food_price": 15,
+        "food_category": "Sides"
+    },
+    {
+        "food_id": 200,
+        "food_name": "Raita",
+        "food_price": 50,
+        "food_category": "Sides"
+    },
+    {
+        "food_id": 201,
+        "food_name": "Aloo Puri",
+        "food_price": "80",
+        "food_category": "Breakfast"
+    },
+    {
+        "food_id": 202,
+        "food_name": "Chole Bhature",
+        "food_price": "120",
+        "food_category": "Breakfast"
+    },
+    {
+        "food_id": 203,
+        "food_name": "Bread Butter",
+        "food_price": "50",
+        "food_category": "Breakfast"
+    },
+    {
+        "food_id": 204,
+        "food_name": "Bread Omelette",
+        "food_price": "70",
+        "food_category": "Breakfast"
+    },
+    {
+        "food_id": 205,
+        "food_name": "Cornflakes with Milk",
+        "food_price": "90",
+        "food_category": "Breakfast"
+    },
+    {
+        "food_id": 206,
+        "food_name": "Tomato Soup",
+        "food_price": "90",
+        "food_category": "Soup & Starters"
+    },
+    {
+        "food_id": 207,
+        "food_name": "Sweet Corn Soup",
+        "food_price": "100",
+        "food_category": "Soup & Starters"
+    },
+    {
+        "food_id": 208,
+        "food_name": "Paneer Tikka",
+        "food_price": "220",
+        "food_category": "Soup & Starters"
+    },
+    {
+        "food_id": 209,
+        "food_name": "Veg Cutlet",
+        "food_price": "120",
+        "food_category": "Soup & Starters"
+    },
+    {
+        "food_id": 210,
+        "food_name": "Cheese Balls",
+        "food_price": "180",
+        "food_category": "Soup & Starters"
+    }
+]
