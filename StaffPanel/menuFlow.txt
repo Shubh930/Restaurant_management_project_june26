@@ -1,0 +1,13 @@
+Customer clicks View Menu
+            ↓
+Show Categories
+            ↓
+Customer selects category
+            ↓
+Open menu.json
+            ↓
+Loop through every food item
+            ↓
+Check category match
+            ↓
+Print matching dishes
