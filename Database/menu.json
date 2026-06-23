@@ -658,5 +658,17 @@
         "food_name": "Cheese Balls",
         "food_price": "180",
         "food_category": "Soup & Starters"
+    },
+    {
+        "food_id": 211,
+        "food_name": "Softy",
+        "food_price": 20,
+        "food_category": "Beverage"
+    },
+    {
+        "food_id": 212,
+        "food_name": "Tomato Soup",
+        "food_price": 49,
+        "food_category": "40"
     }
 ]

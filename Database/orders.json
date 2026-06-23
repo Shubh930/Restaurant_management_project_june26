@@ -26,5 +26,25 @@
         ],
         "Total": 760,
         "Payment_method": "Cash"
+    },
+    {
+        "Order_id": "ORD-21F213",
+        "Order_time": "22-06-26  04:56:26",
+        "Order_type": "Take away",
+        "Order_status": "Completed",
+        "Payment_status": "Paid",
+        "Token_no": 1002,
+        "Items": [
+            {
+                "food_id": 137,
+                "food_name": "Malai Kofta",
+                "food_price": 220,
+                "food_category": "North Indian",
+                "food_quantity": 175,
+                "food_total": 38500
+            }
+        ],
+        "Total": 38500,
+        "Payment_method": "Cash"
     }
 ]
