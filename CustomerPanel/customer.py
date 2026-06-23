@@ -91,7 +91,7 @@ def addto_cart():
         
         while True:
                     
-            item = input("Enter your food ID or food name.")
+            item = input("\nEnter your food ID or food name.")
             
             if item.isdigit():
                 item1 = int(item)
@@ -100,7 +100,7 @@ def addto_cart():
                 item2 = " ".join(item.strip().title().split())
                 break
             else:
-                print("Please enter only Food Id or Food Name."+"\n")
+                print("\nPlease enter only Food Id or Food Name."+"\n")
                 
         with open(food_store, "r") as opened_file:
             menu_list = json.load(opened_file)
@@ -113,13 +113,13 @@ def addto_cart():
             if food["food_id"] == item1 or food["food_name"] == item2:
                 
                 while True:
-                    quantity = input(f"Enter quantity of {food['food_name']} : ")
+                    quantity = input(f"\nEnter quantity of {food['food_name']} : ")
 
                     if quantity.isdigit() and int(quantity) > 0:
                         quantity = int(quantity)
                         break
                     else:
-                        print("Please enter a valid quantity.")
+                        print("\nPlease enter a valid quantity.")
                     
                 food["food_quantity"] = quantity
                 total = food["food_price"] * quantity
@@ -133,7 +133,7 @@ def addto_cart():
                 for dish in cart_list:
 
                     if dish["food_id"] == item1 or dish["food_name"] == item2:
-                        print("Already added to cart!")
+                        print("\nAlready added to cart!")
                         break
 
                 else:
@@ -142,7 +142,7 @@ def addto_cart():
                     with open(item_store, "w") as opened_file:
                         json.dump(cart_list, opened_file, indent=4)
 
-                    print("Added To Cart Successfully!")
+                    print("\nAdded To Cart Successfully!")
                     break
                 
         else:
@@ -479,7 +479,7 @@ def place_order():
                         "Order_status"  : "Confirmed",
                         "Payment_status" : "Due",
                         "Token_no" : token_num,
-                        "Items" : cart_list,
+                        "Items" : wish_list,
                         "Total" : total
                     }
                
