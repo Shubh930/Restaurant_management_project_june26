@@ -55,8 +55,18 @@ def add_food():
     last_id = ton + len(menu_list)
     food_id = last_id + 1
     food_name = " ".join(input("Please enter food name : ").title().strip().split())
-    food_price =int(input("Please add suitable price : "))
-    food_category = " ".join(input("please add food category : ").capitalize().strip().split())
+    
+    while True:
+        food_price = " ".join(input("Please add suitable price : ").strip().split())
+        
+        if food_price.isdigit():
+            food_price = int(food_price)
+            break
+        else:
+            print("\nEnter valid food price.")
+        
+        
+    food_category = " ".join(input("please add food category : ").capitalize().split())
     
     food_info = {
         "food_id"       :  food_id,
@@ -88,8 +98,8 @@ def delete_food():
                 menu_list = json.load(opened_file)
                 
             while True:
-                delete_byID = input("\nEnter food id to delete.")
-                if delete_byID.isdigit() and 100 < int(delete_byID) <= len(menu_list)+100:
+                delete_byID = input("\nEnter food id or food name to delete.")
+                if "".join(delete_byID.strip().split()).isdigit() and 100 < int(delete_byID) <= len(menu_list)+100:
                     delete_byID = int(delete_byID)
                     break
                 else:
@@ -110,7 +120,14 @@ def delete_food():
                 print("This Food does not exist !")
                 
         elif option == 2:
-            delete_byName = " ".join((input("Enter Food Name to Delete : ")).capitalize().strip().split())
+            while True:
+                delete_byName = " ".join((input("Enter Food Name to Delete : ")).capitalize().strip().split())
+                
+                if delete_byName.replace(" ","").isdigit():
+                    break
+                else:
+                    print("\nPlease enter valid food name.")
+            
             with open (food_store,"r") as opened_file:
                 menu_list = json.load(opened_file)
             for food in menu_list:
