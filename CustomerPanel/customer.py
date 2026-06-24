@@ -1,7 +1,7 @@
 from modules import *
 
 def view_menu():
-
+        
     with open(food_store, "r") as opened_file:
         menu_list = json.load(opened_file)
 
@@ -84,86 +84,102 @@ def view_menu():
 
    
 def addto_cart():
+    
     while True:
-        
-        item1 = None
-        item2 = None
-        
-        while True:
-                    
-            item = input("\nEnter your food ID or food name.")
             
-            if item.isdigit():
-                item1 = int(item)
-                break
-            elif item.replace(" ", "").isalpha():
-                item2 = " ".join(item.strip().title().split())
-                break
-            else:
-                print("\nPlease enter only Food Id or Food Name."+"\n")
+            item1 = None
+            item2 = None
+            
+            while True:
+                        
+                item = input("\nEnter your food ID or food name.")
                 
-        with open(food_store, "r") as opened_file:
-            menu_list = json.load(opened_file)
-
-#The else of a for loop runs only when the loop finishes without break.
-#It does not run if a break happens.
-        
-        for food in menu_list:
-
-            if food["food_id"] == item1 or food["food_name"] == item2:
-                
-                while True:
-                    quantity = input(f"\nEnter quantity of {food['food_name']} : ")
-
-                    if quantity.isdigit() and int(quantity) > 0:
-                        quantity = int(quantity)
-                        break
-                    else:
-                        print("\nPlease enter a valid quantity.")
-                    
-                food["food_quantity"] = quantity
-                total = food["food_price"] * quantity
-                food["food_total"] = total
-                
-                with open(item_store, "r") as opened_file:
-                    cart_list = json.load(opened_file)
-
-                # Duplicate check
-                
-                for dish in cart_list:
-
-                    if dish["food_id"] == item1 or dish["food_name"] == item2:
-                        print("\nAlready added to cart!")
-                        break
-
-                else:
-                    cart_list.append(food)
-
-                    with open(item_store, "w") as opened_file:
-                        json.dump(cart_list, opened_file, indent=4)
-
-                    print("\nAdded To Cart Successfully!")
+                if item.isdigit():
+                    item1 = int(item)
                     break
-                
-        else:
-            print("\nFood ID Not Found!")
-            print(f"Please Enter Valid Food ID (101-{len(menu_list)+100}) : "+"\n")
-            
+                elif item.replace(" ", "").isalpha():
+                    item2 = " ".join(item.strip().title().split())
+                    break
+                else:
+                    print("\nPlease enter only Food Id or Food Name."+"\n")
                     
-        while True:
-            choice = input("Do you want to add another item ? (yes/no) : ").strip().lower()
-            if choice == "yes":
-                break
-            elif choice == "no":
-                return
+            try:
+                with open(food_store, "r") as opened_file:
+                    menu_list = json.load(opened_file)
+
+            except FileNotFoundError:
+                print("Required file not found.")
+
+            except json.JSONDecodeError:
+                print("Invalid JSON format in the file.")
+                
+
+    #The else of a for loop runs only when the loop finishes without break.
+    #It does not run if a break happens.
+            
+            for food in menu_list:
+
+                if food["food_id"] == item1 or food["food_name"] == item2:
+                    
+                    while True:
+                        quantity = input(f"\nEnter quantity of {food['food_name']} : ")
+
+                        if quantity.isdigit() and int(quantity) > 0:
+                            quantity = int(quantity)
+                            break
+                        else:
+                            print("\nPlease enter a valid quantity.")
+                        
+                    food["food_quantity"] = quantity
+                    total = food["food_price"] * quantity
+                    food["food_total"] = total
+                    
+                    with open(item_store, "r") as opened_file:
+                        cart_list = json.load(opened_file)
+
+                    # Duplicate check
+                    
+                    for dish in cart_list:
+
+                        if dish["food_id"] == item1 or dish["food_name"] == item2:
+                            print("\nAlready added to cart!")
+                            break
+
+                    else:
+                        cart_list.append(food)
+
+                        with open(item_store, "w") as opened_file:
+                            json.dump(cart_list, opened_file, indent=4)
+
+                        print("\nAdded To Cart Successfully!")
+                        break
+                    
             else:
-                print("Please enter only 'yes' or 'no'. ")
+                print("\nFood ID Not Found!")
+                print(f"Please Enter Valid Food ID (101-{len(menu_list)+100}) : "+"\n")
+                
+                        
+            while True:
+                choice = input("Do you want to add another item ? (yes/no) : ").strip().lower()
+                if choice == "yes":
+                    break
+                elif choice == "no":
+                    return
+                else:
+                    print("Please enter only 'yes' or 'no'. ")
+                    
+         
+def view_cart():
+    
+    try:
+        with open(item_store, "r") as opened_file:
+            cart_list = json.load(opened_file)
+    except FileNotFoundError:
+        print("Required file not found.")
+    except json.JSONDecodeError:
+        print("Invalid json format in the file.")
 
         
-def view_cart():
-
-    with open(item_store, "r") as opened_file:
-        cart_list = json.load(opened_file)
 
     if len(cart_list) != 0:
 
@@ -201,7 +217,7 @@ def update_cart():
     
     item1 = None
     item2 = None
-        
+    attempts = 0   
     while True:
                     
         item = input("\nEnter your food ID or food name.")
@@ -219,16 +235,27 @@ def update_cart():
             if attempts == 3:
                 print("\nToo many invalid attempts.")
                 return
-     
-    with open(item_store,"r") as  opened_file :
-        cart_list = json.load(opened_file)
+            
+    try:
+        with open(item_store,"r") as  opened_file :
+            cart_list = json.load(opened_file)
+    except FileNotFoundError:
+        print("Required file not found.")
+        return
+    except json.JSONDecodeError:
+        print("Invalid json format in the file.")
+        return
+        
     if len(cart_list) != 0:
         for item in cart_list:
+            
             if item["food_id"] == item1 or item["food_name"] == item2:
+           
                 while True:
                     print("\n1. Change")
                     print("2. Remove")
                     update = int(input("\nDo you want to change quantiy or remove the existing dish ? "))
+                
                    
                     if update == 1 :
                         while True:
@@ -274,504 +301,543 @@ def update_cart():
                 
           
 def place_order():
-    order_id = "ORD-"+ uuid.uuid4().hex[:6].upper()
-    order_time = datetime.now().strftime("%d-%m-%y  %I:%M:%S")
     
-    # this is our formatted time . here all letters are sensitive 
-    # %Y = 2026, %y = 26, %H = 24hr, %I = 12hr, 
-    # datetime.now().date() = 12-6-2026
-    # datetime.now().time() = 10:35:42.123456
-    # below time is formatted 
-     
-    with open (item_store,"r") as opened_file:
-        cart_list = json.load(opened_file) 
+    try : 
         
-    if len(cart_list) != 0:
- 
-        while True:
-            print("1. Dine In")
-            print("2. Take Away")
-            order_type = int(input("Select Order Type : "+"\n"))
+        order_id = "ORD-"+ uuid.uuid4().hex[:6].upper()
+        order_time = datetime.now().strftime("%d-%m-%y  %I:%M:%S")
+        
+        # this is our formatted time . here all letters are sensitive 
+        # %Y = 2026, %y = 26, %H = 24hr, %I = 12hr, 
+        # datetime.now().date() = 12-6-2026
+        # datetime.now().time() = 10:35:42.123456
+        # below time is formatted 
+        
+        with open (item_store,"r") as opened_file:
+            cart_list = json.load(opened_file) 
             
-            if order_type == 1:
+        if len(cart_list) != 0:
+    
+            while True:
+                print("1. Dine In")
+                print("2. Take Away")
+                order_type = int(input("Select Order Type : "+"\n"))
                 
-                total = 0 
-                wish_list = [] 
-                
-                while True:
+                if order_type == 1:
                     
-                    item1 = None
-                    item2 = None
+                    total = 0 
+                    wish_list = [] 
                     
                     while True:
-                    
-                        item = input("Enter your food ID or food name.")
                         
-                        if item.isdigit():
-                            item1 = int(item)
-                            break
-                        elif item.replace(" ", "").isalpha():
-                            item2 = " ".join(item.strip().title().split())
-                            break
-                        else:
-                            print("Please enter only Food Id or Food Name."+"\n")
-                    
-                    found = False
-                    
-                    for food in cart_list:
-                        if food["food_id"] == item1 or food["food_name"] == item2:
-                            wish_list.append(food)
-                            cart_list.remove(food)
-                            total = total + food["food_total"]
-                            print(f"{food['food_name']} added to order.")
+                        item1 = None
+                        item2 = None
+                        
+                        while True:
+                        
+                            item = input("Enter your food ID or food name.")
                             
-                            found = True
+                            if item.isdigit():
+                                item1 = int(item)
+                                break
+                            elif item.replace(" ", "").isalpha():
+                                item2 = " ".join(item.strip().title().split())
+                                break
+                            else:
+                                print("Please enter only Food Id or Food Name."+"\n")
+                        
+                        found = False
+                        
+                        for food in cart_list:
+                            if food["food_id"] == item1 or food["food_name"] == item2:
+                                wish_list.append(food)
+                                cart_list.remove(food)
+                                total = total + food["food_total"]
+                                print(f"{food['food_name']} added to order.")
+                                
+                                found = True
+                                
+                                break
                             
-                            break
-                        
-                    if not found:
-                        print("Item not found in cart.")
-                        
-                    with open (item_store,"w") as opened_file:
-                        json.dump(cart_list,opened_file,indent=4)
-                        
-                    while True:
+                        if not found:
+                            print("Item not found in cart.")
                             
-                        choice = input("\nDo you want to order another item from your cartlist ? (yes/no) : ").strip().lower()
-                        
-                        if choice == "yes":
-                            break
-                        elif choice == "no":
-                            break
-                        else:
-                            print("Please enter only 'yes' or 'no'. ")
+                        with open (item_store,"w") as opened_file:
+                            json.dump(cart_list,opened_file,indent=4)
                             
-                    if choice == "no":
-                        break        
+                        while True:
+                                
+                            choice = input("\nDo you want to order another item from your cartlist ? (yes/no) : ").strip().lower()
                             
-                with open(tables_store,"r") as opened_file:
-                    tables_list = json.load(opened_file)
-                for table in tables_list:
-                    if table["status"] == "Available" :
-                        print(f"Table No: {table["table_number"]} - Available")
-                        
-                while True:    
-                    table_num = int(input("\nEnter Table Number : "))
+                            if choice == "yes":
+                                break
+                            elif choice == "no":
+                                break
+                            else:
+                                print("Please enter only 'yes' or 'no'. ")
+                                
+                        if choice == "no":
+                            break        
+                                
                     with open(tables_store,"r") as opened_file:
                         tables_list = json.load(opened_file)
                     for table in tables_list:
-                        if table["table_number"] == table_num and table["status"] == "Available" :
-                            table["status"] = "Occupied"
+                        if table["status"] == "Available" :
+                            print(f"Table No: {table["table_number"]} - Available")
                             
-                            with open(tables_store, "w") as opened_file:
-                                json.dump(tables_list, opened_file, indent=4) 
-                      
+                    while True:    
+                        table_num = int(input("\nEnter Table Number : "))
+                        with open(tables_store,"r") as opened_file:
+                            tables_list = json.load(opened_file)
+                        for table in tables_list:
+                            if table["table_number"] == table_num and table["status"] == "Available" :
+                                table["status"] = "Occupied"
+                                
+                                with open(tables_store, "w") as opened_file:
+                                    json.dump(tables_list, opened_file, indent=4) 
                         
-                            orders_dict = {
-                                "Order_id"   : order_id,
-                                "Order_time" : order_time,
-                                "Order_type" : "Dine in",
-                                "Order_status"  : "Confirmed",
-                                "Payment_status" : "Due",
-                                "Table_no" : table_num,
-                                "Items" : wish_list,
-                                "Total" : total
-                            } 
                             
+                                orders_dict = {
+                                    "Order_id"   : order_id,
+                                    "Order_time" : order_time,
+                                    "Order_type" : "Dine in",
+                                    "Order_status"  : "Confirmed",
+                                    "Payment_status" : "Due",
+                                    "Table_no" : table_num,
+                                    "Items" : wish_list,
+                                    "Total" : total
+                                } 
+                                
+                                
+                                with open(orders_store,"r") as opened_file:
+                                    orders_list = json.load(opened_file)
+                                orders_list.append(orders_dict)
+                                print(json.dumps(orders_list,indent=4))
+                                with open(orders_store,"w") as opened_file:
+                                    json.dump(orders_list,opened_file,indent=4)
                             
-                            with open(orders_store,"r") as opened_file:
-                                orders_list = json.load(opened_file)
-                            orders_list.append(orders_dict)
-                            print(json.dumps(orders_list,indent=4))
-                            with open(orders_store,"w") as opened_file:
-                                json.dump(orders_list,opened_file,indent=4)
-                         
-                            
-                            print("\n" + "="*40)
-                            print("         DINE-IN ORDER CONFIRMED")
-                            print("="*40)
-                            print(f"Table Number  :  {table_num}")
-                            print(f"Total Amount  :  ₹{total}")
-                            print()
-                            print("Please take your seat.")
-                            print()
-                            print("Your order has been successfully placed.")
-                            print()
-                            print("Thank you for ordering from")
-                            print("THE SHUBH RESTAURANT.")
-                            print("="*40)
-                            
-                            return
+                                
+                                print("\n" + "="*40)
+                                print("         DINE-IN ORDER CONFIRMED")
+                                print("="*40)
+                                print(f"Table Number  :  {table_num}")
+                                print(f"Total Amount  :  ₹{total}")
+                                print()
+                                print("Please take your seat.")
+                                print()
+                                print("Your order has been successfully placed.")
+                                print()
+                                print("Thank you for ordering from")
+                                print("THE SHUBH RESTAURANT.")
+                                print("="*40)
+                                
+                                return
+                        
+                        else:
+                            print("\nThis table is reserved.\n"
+                                "Please enter a table number that is available.")
+                                
+                                
+                if order_type == 2:
                     
-                    else:
-                        print("\nThis table is reserved.\n"
-                              "Please enter a table number that is available.")
-                            
-                            
-            if order_type == 2:
-                
-                total = 0 
-                wish_list = [] 
-                
-                while True:
-                    
-                    item1 = None
-                    item2 = None
+                    total = 0 
+                    wish_list = [] 
                     
                     while True:
-                    
-                        item = input("Enter your food ID or food name.")
                         
-                        if item.isdigit():
-                            item1 = int(item)
-                            break
-                        elif item.replace(" ", "").isalpha():
-                            item2 = " ".join(item.strip().title().split())
-                            break
-                        else:
-                            print("Please enter only Food Id or Food Name.")
-                    
-                    found = False
-                    
-                    for food in cart_list:
-                        if food["food_id"] == item1 or food["food_name"] == item2:
-                            wish_list.append(food)
-                            cart_list.remove(food)
-                            total = total + food["food_total"]
-                            print(f"{food['food_name']} added to order.")
-                            
-                            found = True
-                            
-                            break
+                        item1 = None
+                        item2 = None
                         
-                    if not found:
-                        print("Item not found in cart.")
+                        while True:
                         
-                    with open (item_store,"w") as opened_file:
-                        json.dump(cart_list,opened_file,indent=4)
+                            item = input("Enter your food ID or food name.")
+                            
+                            if item.isdigit():
+                                item1 = int(item)
+                                break
+                            elif item.replace(" ", "").isalpha():
+                                item2 = " ".join(item.strip().title().split())
+                                break
+                            else:
+                                print("Please enter only Food Id or Food Name.")
                         
-                    while True:
-                            
-                        choice = input("\nDo you want to order another item from your cartlist ? (yes/no) : ").strip().lower()
+                        found = False
                         
-                        if choice == "yes":
-                            break
-                        elif choice == "no":
-                            break
-                        else:
-                            print("Please enter only 'yes' or 'no'. ")
+                        for food in cart_list:
+                            if food["food_id"] == item1 or food["food_name"] == item2:
+                                wish_list.append(food)
+                                cart_list.remove(food)
+                                total = total + food["food_total"]
+                                print(f"{food['food_name']} added to order.")
+                                
+                                found = True
+                                
+                                break
                             
-                    if choice == "no":
-                        break   
-                    
-                with open (orders_store,"r") as opened_file:
-                    orders_list = json.load(opened_file)
-                    
-                token_num = 1001 + len(orders_list)
-                    
-              
-                         
-                orders_dict = {
-                        "Order_id" : order_id,
-                        "Order_time" : order_time,
-                        "Order_type" : "Take away",
-                        "Order_status"  : "Confirmed",
-                        "Payment_status" : "Due",
-                        "Token_no" : token_num,
-                        "Items" : wish_list,
-                        "Total" : total
-                    }
-               
-                orders_list.append(orders_dict)
-                print(json.dumps(orders_list,indent=4))
-                with open(orders_store,"w") as opened_file:
-                    json.dump(orders_list,opened_file,indent=4)       
-                with open(item_store,"r") as opened_file:
-                    cart_list = json.load(opened_file)
-                with open(item_store,"w") as opened_file:
-                    json.dump([], opened_file, indent=4) # this line is used to empty cart_list
+                        if not found:
+                            print("Item not found in cart.")
                             
-                print("\n" + "="*40)
-                print("       TAKE-AWAY ORDER CONFIRMED")
-                print("="*40)
-                print(f"Token Number  :  {token_num}")
-                print(f"Total Amount  :  ₹{total}")
-                print()
-                print("Please collect it from the counter")
-                print("when your order number is called.")
-                print()
-                print("Your order has been successfully placed.")
-                print()
-                print("Thank you for ordering from")
-                print("THE SHUBH RESTAURANT.")
-                print("="*40)
-                return
+                        with open (item_store,"w") as opened_file:
+                            json.dump(cart_list,opened_file,indent=4)
+                            
+                        while True:
+                                
+                            choice = input("\nDo you want to order another item from your cartlist ? (yes/no) : ").strip().lower()
+                            
+                            if choice == "yes":
+                                break
+                            elif choice == "no":
+                                break
+                            else:
+                                print("Please enter only 'yes' or 'no'. ")
+                                
+                        if choice == "no":
+                            break   
+                        
+                    with open (orders_store,"r") as opened_file:
+                        orders_list = json.load(opened_file)
+                        
+                    token_num = 1001 + len(orders_list)
+                        
+                
+                            
+                    orders_dict = {
+                            "Order_id" : order_id,
+                            "Order_time" : order_time,
+                            "Order_type" : "Take away",
+                            "Order_status"  : "Confirmed",
+                            "Payment_status" : "Due",
+                            "Token_no" : token_num,
+                            "Items" : wish_list,
+                            "Total" : total
+                        }
+                
+                    orders_list.append(orders_dict)
+                    print(json.dumps(orders_list,indent=4))
+                    with open(orders_store,"w") as opened_file:
+                        json.dump(orders_list,opened_file,indent=4)       
+                    with open(item_store,"r") as opened_file:
+                        cart_list = json.load(opened_file)
+                    with open(item_store,"w") as opened_file:
+                        json.dump([], opened_file, indent=4) # this line is used to empty cart_list
+                                
+                    print("\n" + "="*40)
+                    print("       TAKE-AWAY ORDER CONFIRMED")
+                    print("="*40)
+                    print(f"Token Number  :  {token_num}")
+                    print(f"Total Amount  :  ₹{total}")
+                    print()
+                    print("Please collect it from the counter")
+                    print("when your order number is called.")
+                    print()
+                    print("Your order has been successfully placed.")
+                    print()
+                    print("Thank you for ordering from")
+                    print("THE SHUBH RESTAURANT.")
+                    print("="*40)
+                    return
+                
+                else:
+                    print("\nInvalid Order Type. \nPlease Enter Valid Order Type.")
+                
+        else:
+            print("\nYour cart is empty.")
+            print("Please add at least one item to your cart before placing an order.")
             
-            else:
-                print("\nInvalid Order Type. \nPlease Enter Valid Order Type.")
-              
-    else:
-        print("\nYour cart is empty.")
-        print("Please add at least one item to your cart before placing an order.")
-                            
+    except FileNotFoundError:
+        print("Required data file not found.")
+
+    except json.JSONDecodeError:
+        print("Data file is corrupted.")
+
+    except ValueError:
+        print("Please enter numeric values where required.")
+
+    except KeyError as e:
+        print(f"Missing key in data file: {e}")
+
+    except Exception as e:
+        print(f"Unexpected error: {e}") 
+                               
                             
 def generateBill_npay():
     
-    print("what is order type ?")
-    print("1. Dine In")
-    print("2. Take Away")
-    
-    while True:
-        option = int(input("Select an option : "))
+    try:
         
-        if option == 1:
+        print("what is order type ?")
+        print("1. Dine In")
+        print("2. Take Away")
+        
+        while True:
+            option = int(input("Select an option : "))
             
-            while True:
+            if option == 1:
                 
-                print("\nPlease select a payment method:")
-                print("1. Cash")
-                print("2. UPI")
-                print("3. Debit/Credit Card")
-                
-                payment_choice = int(input("\nEnter your choice: "))
-                
-                if payment_choice == 1:
-                    table_num = int(input("\nEnter Your Table Number : "))
-                    with open(orders_store,"r") as opened_file:
-                        orders_list = json.load(opened_file)
-                    for order in orders_list:
-                        if order.get("Table_no") == table_num:
-                            order["Order_status"] = "Completed"
-                            order["Payment_status"] = "Paid"
-                            order["Payment_method"] = "Cash"
-                            with open(orders_store,"w") as opened_file:
-                                json.dump(orders_list,opened_file, indent=4)
+                while True:
+                    
+                    print("\nPlease select a payment method:")
+                    print("1. Cash")
+                    print("2. UPI")
+                    print("3. Debit/Credit Card")
+                    
+                    payment_choice = int(input("\nEnter your choice: "))
+                    
+                    if payment_choice == 1:
+                        table_num = int(input("\nEnter Your Table Number : "))
+                        with open(orders_store,"r") as opened_file:
+                            orders_list = json.load(opened_file)
+                        for order in orders_list:
+                            if order.get("Table_no") == table_num:
+                                order["Order_status"] = "Completed"
+                                order["Payment_status"] = "Paid"
+                                order["Payment_method"] = "Cash"
+                                with open(orders_store,"w") as opened_file:
+                                    json.dump(orders_list,opened_file, indent=4)
 
-                    with open(tables_store,"r") as opened_file:
-                        tables_list = json.load(opened_file)
-                    for table in tables_list:
-                        if table.get("table_number") == table_num:
-                            table["status"] = "Available"
-                    with open(tables_store,"w") as opened_file:
-                        json.dump(tables_list,opened_file,indent=4)   
-                    break            
+                        with open(tables_store,"r") as opened_file:
+                            tables_list = json.load(opened_file)
+                        for table in tables_list:
+                            if table.get("table_number") == table_num:
+                                table["status"] = "Available"
+                        with open(tables_store,"w") as opened_file:
+                            json.dump(tables_list,opened_file,indent=4)   
+                        break            
+                                    
+                    elif payment_choice == 2:
+                        table_num = int(input("\nEnter Your Table Number : "))
+                        with open(orders_store,"r") as opened_file:
+                            orders_list = json.load(opened_file)
+                        for order in orders_list:
+                            if order.get("Table_no") == table_num:
                                 
-                elif payment_choice == 2:
-                    table_num = int(input("\nEnter Your Table Number : "))
-                    with open(orders_store,"r") as opened_file:
-                        orders_list = json.load(opened_file)
-                    for order in orders_list:
-                        if order.get("Table_no") == table_num:
+                                order["Order_status"] = "Completed"
+                                order["Payment_status"] = "Paid"
+                                order["Payment_method"] = "UPI"
+                                with open(orders_store,"w") as opened_file:
+                                    json.dump(orders_list,opened_file, indent=4)
+
+                        with open(tables_store,"r") as opened_file:
+                            tables_list = json.load(opened_file)
+                        for table in tables_list:
+                            if table.get("table_number") == table_num:   # ✅ FIXED HERE
+                                table["status"] = "Available"
+                        with open(tables_store,"w") as opened_file:
+                            json.dump(tables_list,opened_file,indent=4)
+                        break
                             
-                            order["Order_status"] = "Completed"
-                            order["Payment_status"] = "Paid"
-                            order["Payment_method"] = "UPI"
-                            with open(orders_store,"w") as opened_file:
-                                json.dump(orders_list,opened_file, indent=4)
+                    elif payment_choice == 3:
+                        table_num = int(input("\nEnter Your Table Number : "))
+                        with open(orders_store,"r") as opened_file:
+                            orders_list = json.load(opened_file)
+                        for order in orders_list:
+                            if order.get("Table_no") == table_num:
+                                order["Order_status"] = "Completed"
+                                order["Payment_status"] = "Paid"
+                                order["Payment_method"] = "Card"
+                                with open(orders_store,"w") as opened_file:
+                                    json.dump(orders_list,opened_file, indent=4)
 
-                    with open(tables_store,"r") as opened_file:
-                        tables_list = json.load(opened_file)
-                    for table in tables_list:
-                        if table.get("table_number") == table_num:   # ✅ FIXED HERE
-                            table["status"] = "Available"
-                    with open(tables_store,"w") as opened_file:
-                        json.dump(tables_list,opened_file,indent=4)
-                    break
-                           
-                elif payment_choice == 3:
-                    table_num = int(input("\nEnter Your Table Number : "))
-                    with open(orders_store,"r") as opened_file:
-                        orders_list = json.load(opened_file)
-                    for order in orders_list:
-                        if order.get("Table_no") == table_num:
-                            order["Order_status"] = "Completed"
-                            order["Payment_status"] = "Paid"
-                            order["Payment_method"] = "Card"
-                            with open(orders_store,"w") as opened_file:
-                                json.dump(orders_list,opened_file, indent=4)
+                        with open(tables_store,"r") as opened_file:
+                            tables_list = json.load(opened_file)
+                        for table in tables_list:
+                            if table.get("table_number") == table_num:
+                                table["status"] = "Available"
+                        with open(tables_store,"w") as opened_file:
+                            json.dump(tables_list,opened_file,indent=4)
+                        break
+                            
+                    else:
+                        print("\nPlease enter valid payment method !")
+                
+                with open (orders_store,"r") as opened_file:
+                    orders_list = json.load(opened_file)
+                for order in orders_list:
+                    if order.get("Table_no") == table_num:
+                        
+                        print("=" * 40)
+                        print("         THE SHUBH RESTAURANT")
+                        print("=" * 40)
+                        print("              CUSTOMER BILL")
+                        print("=" * 40)
 
-                    with open(tables_store,"r") as opened_file:
-                        tables_list = json.load(opened_file)
-                    for table in tables_list:
-                        if table.get("table_number") == table_num:
-                            table["status"] = "Available"
-                    with open(tables_store,"w") as opened_file:
-                        json.dump(tables_list,opened_file,indent=4)
-                    break
-                           
-                else:
-                    print("\nPlease enter valid payment method !")
-            
-            with open (orders_store,"r") as opened_file:
-                orders_list = json.load(opened_file)
-            for order in orders_list:
-                if order.get("Table_no") == table_num:
+                        print()
+                        print(f"Order ID     : {order['Order_id']}")
+                        print(f"Order Type   : {order['Order_type']}")
+                        print(f"Table No.    : {order['Table_no']}")
+                        print(f"Order Time   : {order['Order_time']}")
+
+                        print()
+                        print("-" * 40)
+                        print(f"{'Item Name':<12}{'Qty':<7}{'Price':<10}{'Total'}")
+                        print("-" * 40)
+
+                        Subtotal = 0
+
+                        for item in order["Items"]:
+                            print(
+                                f"{item['food_name']:<12}"
+                                f"{item['food_quantity']:<7}"
+                                f"₹{item['food_price']:<9}"
+                                f"₹{item['food_total']}"
+                            )
+
+                            Subtotal += item["food_total"]
+
+                        gst = (5 / 100) * Subtotal
+                        service_charge = (5 / 100) * Subtotal
+                        grand_total = Subtotal + gst + service_charge
+
+                        print("-" * 40)
+
+                        print()
+                        print(f"Total Items          : {len(order['Items'])}")
+                        print(f"Subtotal             : ₹{Subtotal:.2f}")
+                        print(f"GST (5%)             : ₹{gst:.2f}")
+                        print(f"Service Charge (5%)  : ₹{service_charge:.2f}")
+
+                        print("-" * 40)
+                        print(f"Grand Total          : ₹{grand_total:.2f}")
+
+                        print()
+                        print("=" * 40)
+                        print("     Thank You For Dining With Us!")
+                        print("            Visit Again!")
+                        print("=" * 40)
+                break 
+        
+            elif option == 2:  
+                while True:
                     
-                    print("=" * 40)
-                    print("         THE SHUBH RESTAURANT")
-                    print("=" * 40)
-                    print("              CUSTOMER BILL")
-                    print("=" * 40)
+                    print("\nPlease select a payment method:")
+                    print("1. Cash")
+                    print("2. UPI")
+                    print("3. Debit/Credit Card")
+                    
+                    payment_choice = int(input("\nEnter your choice: "))
+                    
+                    if payment_choice == 1:
+                        token_num = int(input("\nEnter Your Token Number : "))
+                        with open(orders_store,"r") as opened_file:
+                            orders_list = json.load(opened_file)
+                        for order in orders_list:
+                            if order.get("Token_no") == token_num:
+                                order["Order_status"] = "Completed"
+                                order["Payment_status"] = "Paid"
+                                order["Payment_method"] = "Cash"
+                                with open(orders_store,"w") as opened_file:
+                                    json.dump(orders_list,opened_file, indent=4)
+                        break            
+                                    
+                    elif payment_choice == 2:
+                        token_num = int(input("\nEnter Your Token Number : "))
+                        with open(orders_store,"r") as opened_file:
+                            orders_list = json.load(opened_file)
+                        for order in orders_list:
+                            if order.get("Token_no") == token_num:
+                                order["Order_status"] = "Completed"
+                                order["Payment_status"] = "Paid"
+                                order["Payment_method"] = "UPI"
+                                with open(orders_store,"w") as opened_file:
+                                    json.dump(orders_list,opened_file, indent=4)
+                        break
+                            
+                    elif payment_choice == 3:
+                        token_num = int(input("\nEnter Your Token Number : "))
+                        with open(orders_store,"r") as opened_file:
+                            orders_list = json.load(opened_file)
+                        for order in orders_list:
+                            if order.get("Token_no") == token_num:
+                                order["Order_status"] = "Completed"
+                                order["Payment_status"] = "Paid"
+                                order["Payment_method"] = "Card"
+                                with open(orders_store,"w") as opened_file:
+                                    json.dump(orders_list,opened_file, indent=4)
+                        break
+                            
+                    else:
+                        print("\nPlease enter valid payment method !")
+                        
+                with open (orders_store,"r") as opened_file:
+                    orders_list = json.load(opened_file)
 
-                    print()
-                    print(f"Order ID     : {order['Order_id']}")
-                    print(f"Order Type   : {order['Order_type']}")
-                    print(f"Table No.    : {order['Table_no']}")
-                    print(f"Order Time   : {order['Order_time']}")
+                for order in orders_list:
+                    if order.get("Token_no") == token_num:
+                        
+                        print("=" * 40)
+                        print("         THE SHUBH RESTAURANT")
+                        print("=" * 40)
+                        print("              CUSTOMER BILL")
+                        print("=" * 40)
 
-                    print()
-                    print("-" * 40)
-                    print(f"{'Item Name':<12}{'Qty':<7}{'Price':<10}{'Total'}")
-                    print("-" * 40)
+                        print()
+                        print(f"Order ID     : {order['Order_id']}")
+                        print(f"Order Type   : {order['Order_type']}")
+                        print(f"Token No.    : {order['Token_no']}")
+                        print(f"Order Time   : {order['Order_time']}")
 
-                    Subtotal = 0
+                        print()
+                        print("-" * 40)
+                        print(f"{'Item Name':<12}{'Qty':<7}{'Price':<10}{'Total'}")
+                        print("-" * 40)
 
-                    for item in order["Items"]:
-                        print(
-                            f"{item['food_name']:<12}"
-                            f"{item['food_quantity']:<7}"
-                            f"₹{item['food_price']:<9}"
-                            f"₹{item['food_total']}"
-                        )
+                        Subtotal = 0
 
-                        Subtotal += item["food_total"]
+                        for item in order["Items"]:
+                            print(
+                                f"{item['food_name']:<12}"
+                                f"{item['food_quantity']:<7}"
+                                f"₹{item['food_price']:<9}"
+                                f"₹{item['food_total']}"
+                            )
 
-                    gst = (5 / 100) * Subtotal
-                    service_charge = (5 / 100) * Subtotal
-                    grand_total = Subtotal + gst + service_charge
+                            Subtotal += item["food_total"]
 
-                    print("-" * 40)
+                        gst = (5 / 100) * Subtotal
+                        service_charge = (5 / 100) * Subtotal
+                        grand_total = Subtotal + gst + service_charge
 
-                    print()
-                    print(f"Total Items          : {len(order['Items'])}")
-                    print(f"Subtotal             : ₹{Subtotal:.2f}")
-                    print(f"GST (5%)             : ₹{gst:.2f}")
-                    print(f"Service Charge (5%)  : ₹{service_charge:.2f}")
+                        print("-" * 40)
 
-                    print("-" * 40)
-                    print(f"Grand Total          : ₹{grand_total:.2f}")
+                        print()
+                        print(f"Total Items          : {len(order['Items'])}")
+                        print(f"Subtotal             : ₹{Subtotal:.2f}")
+                        print(f"GST (5%)             : ₹{gst:.2f}")
+                        print(f"Service Charge (5%)  : ₹{service_charge:.2f}")
 
-                    print()
-                    print("=" * 40)
-                    print("     Thank You For Dining With Us!")
-                    print("            Visit Again!")
-                    print("=" * 40)
-            break 
-    
-        elif option == 2:  
-            while True:
+                        print("-" * 40)
+                        print(f"Grand Total          : ₹{grand_total:.2f}")
+
+                        print()
+                        print("=" * 40)
+                        print("     Thank You For Dining With Us!")
+                        print("            Visit Again!")
+                        print("=" * 40)
+
+                break
                 
-                print("\nPlease select a payment method:")
-                print("1. Cash")
-                print("2. UPI")
-                print("3. Debit/Credit Card")
+            else:
+                print("Enter a valid number ! ")
                 
-                payment_choice = int(input("\nEnter your choice: "))
-                
-                if payment_choice == 1:
-                    token_num = int(input("\nEnter Your Token Number : "))
-                    with open(orders_store,"r") as opened_file:
-                        orders_list = json.load(opened_file)
-                    for order in orders_list:
-                        if order.get("Token_no") == token_num:
-                            order["Order_status"] = "Completed"
-                            order["Payment_status"] = "Paid"
-                            order["Payment_method"] = "Cash"
-                            with open(orders_store,"w") as opened_file:
-                                json.dump(orders_list,opened_file, indent=4)
-                    break            
+    except FileNotFoundError:
+        print("Required file not found.")
+
+    except json.JSONDecodeError:
+        print("Data file is empty or corrupted.")
+
+    except ValueError:
+        print("Invalid input. Please enter correct data.")
+
+    except KeyError as e:
+        print(f"Missing key in JSON file: {e}")
                                 
-                elif payment_choice == 2:
-                    token_num = int(input("\nEnter Your Token Number : "))
-                    with open(orders_store,"r") as opened_file:
-                        orders_list = json.load(opened_file)
-                    for order in orders_list:
-                        if order.get("Token_no") == token_num:
-                            order["Order_status"] = "Completed"
-                            order["Payment_status"] = "Paid"
-                            order["Payment_method"] = "UPI"
-                            with open(orders_store,"w") as opened_file:
-                                json.dump(orders_list,opened_file, indent=4)
-                    break
-                           
-                elif payment_choice == 3:
-                    token_num = int(input("\nEnter Your Token Number : "))
-                    with open(orders_store,"r") as opened_file:
-                        orders_list = json.load(opened_file)
-                    for order in orders_list:
-                        if order.get("Token_no") == token_num:
-                            order["Order_status"] = "Completed"
-                            order["Payment_status"] = "Paid"
-                            order["Payment_method"] = "Card"
-                            with open(orders_store,"w") as opened_file:
-                                json.dump(orders_list,opened_file, indent=4)
-                    break
-                           
-                else:
-                    print("\nPlease enter valid payment method !")
-                    
-            with open (orders_store,"r") as opened_file:
-                orders_list = json.load(opened_file)
+    except IndexError:
+        print("Invalid index selected.")
 
-            for order in orders_list:
-                if order.get("Token_no") == token_num:
-                    
-                    print("=" * 40)
-                    print("         THE SHUBH RESTAURANT")
-                    print("=" * 40)
-                    print("              CUSTOMER BILL")
-                    print("=" * 40)
-
-                    print()
-                    print(f"Order ID     : {order['Order_id']}")
-                    print(f"Order Type   : {order['Order_type']}")
-                    print(f"Token No.    : {order['Token_no']}")
-                    print(f"Order Time   : {order['Order_time']}")
-
-                    print()
-                    print("-" * 40)
-                    print(f"{'Item Name':<12}{'Qty':<7}{'Price':<10}{'Total'}")
-                    print("-" * 40)
-
-                    Subtotal = 0
-
-                    for item in order["Items"]:
-                        print(
-                            f"{item['food_name']:<12}"
-                            f"{item['food_quantity']:<7}"
-                            f"₹{item['food_price']:<9}"
-                            f"₹{item['food_total']}"
-                        )
-
-                        Subtotal += item["food_total"]
-
-                    gst = (5 / 100) * Subtotal
-                    service_charge = (5 / 100) * Subtotal
-                    grand_total = Subtotal + gst + service_charge
-
-                    print("-" * 40)
-
-                    print()
-                    print(f"Total Items          : {len(order['Items'])}")
-                    print(f"Subtotal             : ₹{Subtotal:.2f}")
-                    print(f"GST (5%)             : ₹{gst:.2f}")
-                    print(f"Service Charge (5%)  : ₹{service_charge:.2f}")
-
-                    print("-" * 40)
-                    print(f"Grand Total          : ₹{grand_total:.2f}")
-
-                    print()
-                    print("=" * 40)
-                    print("     Thank You For Dining With Us!")
-                    print("            Visit Again!")
-                    print("=" * 40)
-
-            break
-            
-        else:
-            print("Enter a valid number ! ")
-                                
-                       
+    except TypeError:
+        print("Invalid data type encountered.")
+        
+    except Exception as e:
+        print(f"Unexpected error occurred: {e}")                   
                     
                 
                 
