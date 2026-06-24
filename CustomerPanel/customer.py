@@ -272,8 +272,7 @@ def update_cart():
     else:
         print("Your cart is empty ! ")
                 
-        
-   
+          
 def place_order():
     order_id = "ORD-"+ uuid.uuid4().hex[:6].upper()
     order_time = datetime.now().strftime("%d-%m-%y  %I:%M:%S")
@@ -514,9 +513,8 @@ def place_order():
     else:
         print("\nYour cart is empty.")
         print("Please add at least one item to your cart before placing an order.")
-                                  
                             
-                               
+                            
 def generateBill_npay():
     
     print("what is order type ?")
