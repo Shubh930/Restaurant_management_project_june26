@@ -55,7 +55,7 @@ This project demonstrates the practical implementation of Python concepts such a
 
 ## 📂 Project Structure
 
-```text
+
 SHUBHrestro/
 │
 ├── main.py
