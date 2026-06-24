@@ -47,7 +47,16 @@ while True:
                 
                 if choice2 == 1:
                     
-                    logged_user = auth.sign_in()
+                    
+                    while True:
+                        try:
+                            logged_user = auth.sign_in()
+                        except Exception as e:
+                            print(f"Authentication Error : {e}")
+                            continue
+                        else:
+                            print("Login successful!")
+                            break
 
                     if logged_user and logged_user["Role"] == "Admin":
                     
@@ -144,7 +153,15 @@ while True:
                 
                 if choice2 == 1:
                     
-                    logged_user = auth.sign_in()
+                    while True:
+                        try:
+                            logged_user = auth.sign_in()
+                        except Exception as e:
+                            print(f"Authentication Error : {e}")
+                            continue
+                        else:
+                            print("Login successful!")
+                            break
 
                     if logged_user and logged_user["Role"] == "Customer":
 
@@ -195,7 +212,18 @@ while True:
                                 print("You selected invalid service.")
                             
                 elif choice2 == 2:
-                    auth.create_account()
+                    
+                    while True:
+                        try:
+                            auth.create_account()
+                            print("Account has been created successfully.")
+                        except FileNotFoundError:
+                            print("Users file not found.")
+                        except json.JSONDecodeError:
+                            print("Users file contains invalid data.")
+                        except Exception as e:
+                            print(f"Error : {e}")
+                            break
                     
                 elif choice2 == 3:
                     break
@@ -226,7 +254,16 @@ while True:
                 
                 if choice2 == 1:
                     
-                    logged_user = auth.sign_in()
+                    
+                    while True:
+                        try:
+                            logged_user = auth.sign_in()
+                            print("Login successful!")
+                            break
+                        except Exception as e:
+                            print(f"Authentication Error : {e}")
+                            continue
+                            
 
                     if logged_user and logged_user["Role"] == "Staff":
         
