@@ -80,7 +80,13 @@ def add_food():
         menu_list.append(food_info)
     with open(food_store, "w") as opened_file :
         json.dump(menu_list, opened_file, indent=4)
-    print("Your dish has been succefully added to menu.")
+    
+    print("\nYour dish has been succefully added to menu.")
+    print("\nAdded Food Details:")
+    print(f"Food ID       : {food_info['food_id']}")
+    print(f"Food Name     : {food_info['food_name']}")
+    print(f"Food Price    : ₹{food_info['food_price']}")
+    print(f"Food Category : {food_info['food_category']}")
         
     # food_json = json.dumps(food_info, indent=4)
     # file.write(food_json)
@@ -98,7 +104,7 @@ def delete_food():
                 menu_list = json.load(opened_file)
                 
             while True:
-                delete_byID = input("\nEnter food id or food name to delete.")
+                delete_byID = input("\nEnter food id or to delete.")
                 if "".join(delete_byID.strip().split()).isdigit() and 100 < int(delete_byID) <= len(menu_list)+100:
                     delete_byID = int(delete_byID)
                     break
@@ -135,13 +141,13 @@ def delete_food():
                     menu_list.remove(food)
                     with open(food_store,"w") as opened_file:
                         json.dump(menu_list,opened_file,indent=4)
-                    print("Deleted Successfully !")
+                    print("\n\Deleted Successfully !")
                     return
             else:
-                print("This food does not exist !")
+                print("\nThis food does not exist !")
                 
         else:
-            print("Invalid Option !")
+            print("\nInvalid Option !")
             
                                 
 def update_food():
@@ -367,7 +373,14 @@ def delete_orders():
 def view_members():
     with open(users_store, "r") as opened_file:
         users_list = json.load(opened_file)
-    role_name = input("Enter your preferred role that you wanna view.").capitalize().strip()
+        
+    while True:
+        role_name = input("\nEnter your preferred role that you wanna view.").capitalize().strip()
+        if role_name.isdigit():
+            break
+        else:
+            print("\nPlease enter valid role.")
+                    
     role_name_count = 0
 
     print("\n╔═══════════════════════════════════════════════════════════════════════════════════╗")
@@ -416,8 +429,9 @@ def add_staff():
             print("Enter valid name.")
             
     while True:
-        age = int(input("\nEnter your age : "))
-        if 18 <= age <= 100:
+        age = input("\nEnter your age : ")
+        if age.isdigit() and 18 <= int(age) <= 100:
+            age = int(age)
             break
         else:
             print("Enter valid age.")
