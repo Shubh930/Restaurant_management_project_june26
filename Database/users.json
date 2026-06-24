@@ -251,5 +251,16 @@
         "Role": "Staff",
         "Gender": "Female",
         "Phone": "9876543229"
+    },
+    {
+        "User ID": 24,
+        "Full Name": "Aryan Alvi",
+        "Username": "aryan1@gmail.com",
+        "Password": "aryan12345",
+        "Address": "Gurugram",
+        "Age": 19,
+        "Role": "Staff",
+        "Gender": "Male",
+        "Phone": "7899005089"
     }
 ]
